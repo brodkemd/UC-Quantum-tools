@@ -1,9 +1,10 @@
-import json
-from ..config import _states, _circs, _hists, _layout_file, _master_show
-import os
+from . import _states, _circs, _hists, _layout_file, _master_show
+from ._src import _trigger
+from atexit import register
+import os, json
 
 _layout = {}
-_adjuster = lambda layout : layout
+_to_flip = {}
 
 # turns path into absolute path if it isn't
 def abs_path(path): return os.path.abspath(path.replace("~", os.path.expanduser("~")))
@@ -15,45 +16,37 @@ def image_list_to_str(image_list:list[str])->str:
         to_return+=f"<img src=\"{{URI}}{abs_path(item)}\" alt=\"no image to display\">"
     return to_return
 
-def _inverter(layout):
+def _inverter(layout, flip:dict[str : str]):
     for item in list(layout):
-        if item == "top":
-            other = layout["top"]
-            layout["top"] = layout["bottom"]
-            layout["bottom"] = other
-        elif item == "left":
-            other = layout["left"]
-            layout["left"] = layout["right"]
-            layout["right"] = other
+        if item in flip:
+            other = layout[item]
+            layout[item] = layout[flip[item]]
+            layout[flip[item]] = other
+
     
     for item in list(layout):
         if not isinstance(layout[item], str):
-            layout[item] = _inverter(layout[item])
+            layout[item] = _inverter(layout[item], flip)
 
     return layout
 
 def invert():
-    global _layout, _adjuster, _states, _circs, _hists, _layout_file
-    _adjuster = _inverter
-
-def _horizontal_inverter(layout):
-    return layout
+    global _to_flip
+    _to_flip = {"left" : "right", "top" : "bottom"}
 
 def horizontal_invert():
-    global _layout, _adjuster, _states, _circs, _hists, _layout_file
-    _adjuster = _horizontal_inverter
+    global _to_flip
+    _to_flip = {"left" : "right"}
 
-def _vertical_inverter(layout):
-    return layout
 
 def vertical_invert():
-    global _layout, _adjuster, _states, _circs, _hists, _layout_file
-    _adjuster = _vertical_inverter
+    global _to_flip
+    _to_flip = {"top" : "bottom"}
 
 
 # default layout of the viewer
 def default():
-    global _layout, _adjuster, _states, _circs, _hists, _layout_file
+    global _layout, _states, _circs, _hists
     # if the statevector and an image is to be rendered
     if len(_states) and (len(_hists) or len(_circs)):
         #state_path = abs_path(os.path.join(_config_dir,  "_state_.html"))
@@ -109,21 +102,30 @@ def default():
         _layout["only"] = "<h1>No data to display</h1>"
 
 def _run():
-    global _layout, _adjuster, _states, _circs, _hists, _master_show
+    global _layout, _to_flip, _states, _circs, _hists, _master_show
     if _master_show:
         # running the default layout generator
         default()
-        _layout = _adjuster(_layout)
+        if len(_to_flip):
+            _layout = _inverter(_layout, _to_flip)
 
-        print("unloading layout")
+        #print("unloading layout")
         with open(_layout_file, 'w') as f:
             f.write(json.dumps(_layout, indent=2))
         
         # clearing the values
-        _adjuster = lambda layout : layout
+        _to_flip = {}
         _layout = {}
         _states = []
         _circs = [] 
         _hists = []
     
-        
+def _exit():
+    from . import _master_show
+    if _master_show:
+        #print("here")
+        from .layout import _run
+        _run()
+        _trigger()
+
+register(_exit)

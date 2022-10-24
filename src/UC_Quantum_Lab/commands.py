@@ -2,13 +2,22 @@ from qiskit import QuantumCircuit, Aer, execute
 from qiskit.quantum_info import Statevector
 from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
+from atexit import register
 from math import log
-from ..config import _states, _circs, _hists, _master_show, _show_plt
-from .. import get_path
+from . import _states, _circs, _hists, _master_show, _show_plt
+from ._src import get_path
 
 _circ_count = 0
 _state_count = 0
 _hist_count = 0
+
+def _show_at_exit():
+    global _show_plt
+    if _show_plt:
+        #print("opening mpl figures")
+        plt.show()
+
+register(_show_at_exit)
 
 # diplays the image in the viewer or saves the image to the inputted path
 def display(circuit:QuantumCircuit, path:str=""):
@@ -17,15 +26,13 @@ def display(circuit:QuantumCircuit, path:str=""):
     plt.tight_layout()
     if len(path): plt.savefig(path)
     elif _master_show:
-        print("displaying circuit")
+        #print("displaying circuit")
         p = get_path(f"_circ_{_circ_count}.png")
         plt.savefig(p)
         _circs.append(p)
         _circ_count+=1
     else: 
-        print("setting plt")
         _show_plt = True
-        print(_show_plt)
 
 # generates binary strings
 def getbin(n, s=['']):
@@ -50,7 +57,7 @@ def state(circuit:QuantumCircuit, show=True):
         _data[_options[i]] = str(val).replace("(", "").replace(")", "")
 
     if show and _master_show:
-        print("showing state vector")
+        #print("showing state vector")
         if len(_states):
             if len(_options[i]) > len(list(_states.keys())[0]):
                 raise KeyError("States must be obtained from the same circuit")
@@ -68,16 +75,15 @@ def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), pa
     counts = execute(circuit, backend=backend, shots=1024).result().get_counts()
     if len(path): plt.savefig(path)
     elif _master_show:
-        print("displaying histogram")
+        #print("displaying histogram")
         plot_histogram(counts)
         p = get_path(f"_hist_{_hist_count}.png")
         plt.savefig(p)
         _hists.append(p)
         _hist_count+=1
     else:
-        print("setting plt")
+        plot_histogram(counts)
         _show_plt = True
-        print(_show_plt)
     return counts
 
 
