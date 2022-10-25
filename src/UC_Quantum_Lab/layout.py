@@ -1,7 +1,7 @@
 from . import _states, _circs, _hists, _layout_file, _master_show, _config_dir, _trigger_file
 from ._src import _trigger
 from atexit import register
-import os, json
+import os, json, platform
 
 _layout = {}
 _to_flip = {}
@@ -13,7 +13,10 @@ def abs_path(path): return os.path.abspath(path.replace("~", os.path.expanduser(
 def image_list_to_str(image_list:list[str])->str:
     to_return = ""
     for item in image_list:
-        to_return+=f"<img src=\"{{URI}}{abs_path(item)}\" alt=\"no image to display\">"
+        p = abs_path(item)
+        if platform.system() == "Windows":
+            p = p[p.index(":")+1:].replace("\\", "/")
+        to_return+=f"<img src=\"{{URI}}{p}\" alt=\"no image to display\">"
     return to_return
 
 def _inverter(layout, flip:dict[str : str]):

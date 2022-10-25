@@ -1,4 +1,3 @@
-from atexit import register
 import os 
 
 _config_dir = ".UCQ_config"
