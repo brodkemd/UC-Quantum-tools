@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(
     name='U_Cincy_quantum_tools',
-    version='0.0.4',
+    version='0.0.5',
     author='Marek Brodke, with support from the University of Cincinnati',
     description='Provides functionaliy for UC_Quantum_Lab development tools',
     long_description="Provides functionaliy for UC_Quantum_Lab development tools",
