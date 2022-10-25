@@ -11,6 +11,9 @@ _circ_count = 0
 _state_count = 0
 _hist_count = 0
 
+def message(msg):
+    print(f"UC_Quantum_Lab: {msg}")
+
 def _show_at_exit():
     global _show_plt
     if _show_plt:
@@ -28,6 +31,7 @@ def display(circuit:QuantumCircuit, path:str=""):
     elif _master_show:
         #print("displaying circuit")
         p = get_path(f"_circ_{_circ_count}.png")
+        message(f"outputing circuit diagram to \"_circ_{_circ_count}.png\"")
         plt.savefig(p)
         _circs.append(p)
         _circ_count+=1
@@ -78,6 +82,7 @@ def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), pa
         #print("displaying histogram")
         plot_histogram(counts)
         p = get_path(f"_hist_{_hist_count}.png")
+        message(f"outputing histogram to \"_hist_{_hist_count}.png\"")
         plt.savefig(p)
         _hists.append(p)
         _hist_count+=1
