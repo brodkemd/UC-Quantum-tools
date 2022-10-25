@@ -108,6 +108,16 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             from UC_Quantum_Lab.layout import vertical_invert
             vertical_invert()
             ```
-
+    - `custom`
+        - **Description**: This only works with the vscode extension UC_Quantum_Lab. Creates a custom webview from the inputted json using the format specified in https://github.com/brodkemd/UC_Quantum_Lab in the "*About json to html converter*" section.
+        - **inputs**:
+            - `layout_json:JSON`: json style object to set to the webviewer html.
+        - **returns** (nothing)
+        - **Example Useage**
+            ```python
+            from UC_Quantum_Lab.layout import custom
+            custom({"left": "<h1>hello</h1>", "right" : "<h1>hello</h1>"})
+            ```
+        - **NOTE**: if you call this function before you call the inverts above the inverts will apply.
 
 

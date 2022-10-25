@@ -5,6 +5,7 @@ import os, json, platform
 
 _layout = {}
 _to_flip = {}
+_custom = False
 
 # turns path into absolute path if it isn't
 def abs_path(path): return os.path.abspath(path.replace("~", os.path.expanduser("~")))
@@ -104,11 +105,18 @@ def default():
     else:
         _layout["only"] = "<h1>No data to display</h1>"
 
+def custom(layout_json):
+    global _layout, _custom
+    _layout = layout_json
+    _custom = True
+
+
 def _run():
-    global _layout, _to_flip, _states, _circs, _hists, _master_show
+    global _layout, _to_flip, _states, _circs, _hists, _master_show, _custom
     if _master_show:
-        # running the default layout generator
-        default()
+        if not _custom:
+            # running the default layout generator
+            default()
         if len(_to_flip):
             _layout = _inverter(_layout, _to_flip)
 
