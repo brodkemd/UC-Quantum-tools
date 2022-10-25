@@ -1,4 +1,4 @@
-from . import _states, _circs, _hists, _layout_file, _master_show
+from . import _states, _circs, _hists, _layout_file, _master_show, _config_dir, _trigger_file
 from ._src import _trigger
 from atexit import register
 import os, json
@@ -120,12 +120,20 @@ def _run():
         _circs = [] 
         _hists = []
     
-def _exit():
+def _layout_at_exit():
     from . import _master_show
     if _master_show:
         #print("here")
         from .layout import _run
         _run()
         _trigger()
+
+register(_layout_at_exit)
+
+def _exit():
+    for item in os.listdir(_config_dir):
+        # deletes png html or the trigger file from the config dir
+        if item == _trigger_file:
+            os.remove(os.path.join(_config_dir, item))
 
 register(_exit)
