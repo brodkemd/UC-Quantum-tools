@@ -27,11 +27,12 @@ def display(circuit:QuantumCircuit, path:str=""):
     global _circ_count, _circs, _master_show, _show_plt
     circuit.draw(output='mpl')
     plt.tight_layout()
-    if len(path): plt.savefig(path)
+    if len(path): 
+        message(f"outputing circuit diagram to \"{path}\"")
+        plt.savefig(path)
     elif _master_show:
         #print("displaying circuit")
         p = get_path(f"_circ_{_circ_count}.png")
-        message(f"outputing circuit diagram to \"_circ_{_circ_count}.png\"")
         plt.savefig(p)
         _circs.append(p)
         _circ_count+=1
@@ -77,12 +78,13 @@ def state(circuit:QuantumCircuit, show=True):
 def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), path:str=""):
     global _hist_count, _hists, _master_show, _show_plt
     counts = execute(circuit, backend=backend, shots=1024).result().get_counts()
-    if len(path): plt.savefig(path)
+    if len(path): 
+        message(f"outputing histogram to \"{path}\"")
+        plt.savefig(path)
     elif _master_show:
         #print("displaying histogram")
         plot_histogram(counts)
         p = get_path(f"_hist_{_hist_count}.png")
-        message(f"outputing histogram to \"_hist_{_hist_count}.png\"")
         plt.savefig(p)
         _hists.append(p)
         _hist_count+=1
