@@ -1,6 +1,7 @@
 # UCQ_tools
-See the project on pypi for the download at:
-https://pypi.org/project/U-Cincy-quantum-tools/
+## Resources
+- PyPi: See the project on pypi for the download at: https://pypi.org/project/UC-Quantum-tools/
+- GitHub: See the project repo at: https://github.com/UC-Advanced-Research-Computing/UC-Quantum-tools
 
 ## Bugs
 If you encounter a bug please make an issue in the "issues" tab above. This is a maintained repo and we will respond.

@@ -1,4 +1,12 @@
 # Changelog
+## [0.1.6] - 2022-10-27
+### Added
+- migrated pypi projects, updated README
+
+## [0.1.5] - 2022-10-27
+### Added
+- migrated repos
+
 ## [0.1.4] - 2022-10-27
 ### Added
 - ability for counts result to be strictly returned (i.e. no image of matplotlib figure is created)

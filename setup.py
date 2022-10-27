@@ -1,15 +1,20 @@
 from setuptools import setup
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
-    name='U_Cincy_quantum_tools',
-    version='0.1.4',
+    name='UC-Quantum-tools',
+    version='0.1.6',
     author='Marek Brodke, with support from the University of Cincinnati',
-    description='Provides functionaliy for UC_Quantum_Lab development tools',
-    long_description="Provides functionaliy for UC_Quantum_Lab development tools",
+    description='Provides functionaliy for UC-Quantum-Lab development tools',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     keywords='development',
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     license="MIT",
     author_email="brodkemd@mail.uc.edu",
-    url="https://github.com/brodkemd/UCQ_tools",
+    url="https://github.com/UC-Advanced-Research-Computing/UC-Quantum-tools",
     install_requires=[
         'qiskit>=0.36',
         'matplotlib>=2.2.0',
