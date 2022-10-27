@@ -8,19 +8,19 @@ _to_flip = {}
 _custom = False
 
 # turns path into absolute path if it isn't
-def abs_path(path): return os.path.abspath(path.replace("~", os.path.expanduser("~")))
+def _abs_path(path): return os.path.abspath(path.replace("~", os.path.expanduser("~")))
 
 # converts list of image files to html img elements
-def image_list_to_str(image_list:list[str])->str:
+def _image_list_to_str(image_list:list[str])->str:
     to_return = ""
     for item in image_list:
-        p = abs_path(item)
+        p = _abs_path(item)
         if platform.system() == "Windows":
             p = p[p.index(":")+1:].replace("\\", "/")
         to_return+=f"<img src=\"{{URI}}{p}\" alt=\"no image to display\">"
     return to_return
 
-def _inverter(layout, flip:dict[str : str]):
+def _inverter(layout, flip:dict[str,str]):
     for item in list(layout):
         if item in flip:
             other = layout[item]
@@ -34,26 +34,26 @@ def _inverter(layout, flip:dict[str : str]):
 
     return layout
 
-def invert():
+def invert() -> None:
     global _to_flip
     _to_flip = {"left" : "right", "top" : "bottom"}
 
-def horizontal_invert():
+def horizontal_invert() -> None:
     global _to_flip
     _to_flip = {"left" : "right"}
 
 
-def vertical_invert():
+def vertical_invert() -> None:
     global _to_flip
     _to_flip = {"top" : "bottom"}
 
 
 # default layout of the viewer
-def default():
+def default() -> None:
     global _layout, _states, _circs, _hists
     # if the statevector and an image is to be rendered
     if len(_states) and (len(_hists) or len(_circs)):
-        #state_path = abs_path(os.path.join(_config_dir,  "_state_.html"))
+        #state_path = _abs_path(os.path.join(_config_dir,  "_state_.html"))
         msg = "\\[\\begin{matrix} "
         length = len(_states)
         for i, item in enumerate(list(_states)):
@@ -70,14 +70,14 @@ def default():
         _layout["left"] = msg #f"<div data-include=\"{{URI}}{state_path}\"></div>"
 
         if len(_hists) and len(_circs):
-            _layout["right"] = {"top" : image_list_to_str(_circs), "bottom" : image_list_to_str(_hists)}
+            _layout["right"] = {"top" : _image_list_to_str(_circs), "bottom" : _image_list_to_str(_hists)}
         elif len(_hists):
-            _layout["right"] = image_list_to_str(_hists)
+            _layout["right"] = _image_list_to_str(_hists)
         elif len(_circs):
-            _layout["right"] = image_list_to_str(_circs)
+            _layout["right"] = _image_list_to_str(_circs)
     
     elif len(_states):
-        #state_path = abs_path(os.path.join(_config_dir,  "_state_.html"))
+        #state_path = _abs_path(os.path.join(_config_dir,  "_state_.html"))
         msg = "\\[\\begin{matrix} "
         length = len(_states)
         for i, item in enumerate(list(_states)):
@@ -95,17 +95,17 @@ def default():
 
     elif len(_hists) or len(_circs):
         if len(_hists) and len(_circs):
-            _layout["top"] = image_list_to_str(_circs)
-            _layout["bottom"] = image_list_to_str(_hists)
+            _layout["top"] = _image_list_to_str(_circs)
+            _layout["bottom"] = _image_list_to_str(_hists)
         elif len(_hists):
-            _layout["only"] = image_list_to_str(_hists)
+            _layout["only"] = _image_list_to_str(_hists)
         elif len(_circs):
-            _layout["only"] = image_list_to_str(_circs)
+            _layout["only"] = _image_list_to_str(_circs)
     
     else:
         _layout["only"] = "<h1>No data to display</h1>"
 
-def custom(layout_json):
+def custom(layout_json) -> None:
     global _layout, _custom
     _layout = layout_json
     _custom = True

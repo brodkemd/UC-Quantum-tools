@@ -58,6 +58,7 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             - `circuit:QuantumCircuit`: a qiskit quantum circuit **that must have measurements in it**.
             - `backend:simulator` (optional): the simulator to execute the circuit on, default is IBM's qasm simulator. 
             - `path:string` (optional): a string path that you want to save the figure to.
+            - `show:boolean` (optional): whether or not display the circuit, default is true. If false, then only the dictionary will be returned and nothing else will happen.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**:
             - `counts:dictionary`: the results of the simulation of the circuit as a dictionay where the keys are the binary strings and the values of the keys are the number of the times the binary string is the output of the circuit out of 1024. You do not have to use this return (just do not assign it to a variable).

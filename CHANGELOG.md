@@ -1,4 +1,16 @@
 # Changelog
+## [0.1.4] - 2022-10-27
+### Added
+- ability for counts result to be strictly returned (i.e. no image of matplotlib figure is created)
+- fixed bug with histogram binary strings
+
+## [0.1.3] - 2022-10-26
+### Added
+- minor bug fixes
+
+## [0.1.2] - 2022-10-26
+### Added
+- minor bug fixes
 
 ## [0.1.1] - 2022-10-25
 ### Added
