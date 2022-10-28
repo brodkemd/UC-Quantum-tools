@@ -9,7 +9,6 @@ def _trigger():
     global _config_dir, _trigger_file
     
     if _config_dir in os.listdir():
-        print("triggering")
         with open(os.path.join(_config_dir, _trigger_file), 'w'): pass
 
 
