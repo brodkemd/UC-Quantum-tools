@@ -1,4 +1,9 @@
 # Changelog
+## [0.1.7] - 2022-10-28
+### Added
+- fixed bug with registering atexit functions
+
+
 ## [0.1.6] - 2022-10-27
 ### Added
 - migrated pypi projects, updated README

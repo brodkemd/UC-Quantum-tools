@@ -2,7 +2,6 @@ from qiskit import QuantumCircuit, Aer, execute
 from qiskit.quantum_info import Statevector
 from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
-from atexit import register
 from math import log
 from . import _states, _circs, _hists, _master_show, _show_plt
 from ._src import _get_path
@@ -19,8 +18,6 @@ def _show_at_exit():
     if _show_plt:
         #print("opening mpl figures")
         plt.show()
-
-register(_show_at_exit)
 
 # diplays the image in the viewer or saves the image to the inputted path
 def display(circuit:QuantumCircuit, path:str="")->None:
