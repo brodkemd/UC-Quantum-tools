@@ -10,10 +10,11 @@ _states = {}
 _circs = []
 _hists = []
 
-
+print("here")
 # cleans up the config directory on init of this python module
 if _config_dir in os.listdir():
     _master_show = True
+    print("here")
     #print("cleaning up config dir")
     for item in os.listdir(_config_dir):
         # deletes png html or the trigger file from the config dir
