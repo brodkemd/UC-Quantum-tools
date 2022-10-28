@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='UC-Quantum-tools',
-    version='0.1.6',
+    version='0.1.8',
     author='Marek Brodke, with support from the University of Cincinnati',
     description='Provides functionaliy for UC-Quantum-Lab development tools',
     long_description=long_description,

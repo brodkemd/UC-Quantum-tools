@@ -7,7 +7,7 @@ Creates a file that triggers the vscode extension
 """
 def _trigger():
     global _config_dir, _trigger_file
-    #print("triggering")
+    
     if _config_dir in os.listdir():
         with open(os.path.join(_config_dir, _trigger_file), 'w'): pass
 
