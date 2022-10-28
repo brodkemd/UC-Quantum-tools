@@ -1,8 +1,11 @@
 # Changelog
+## [0.1.8] - 2022-10-28
+### Added
+- fixed bug with layout at exit functionality, making package detection better
+
 ## [0.1.7] - 2022-10-28
 ### Added
 - fixed bug with registering atexit functions
-
 
 ## [0.1.6] - 2022-10-27
 ### Added
