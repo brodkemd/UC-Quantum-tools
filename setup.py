@@ -16,12 +16,12 @@ setup(
     author_email="brodkemd@mail.uc.edu",
     url="https://github.com/UC-Advanced-Research-Computing/UC-Quantum-tools",
     install_requires=[
-        'qiskit>=0.36',
-        'matplotlib>=2.2.0',
-        'qiskit-aer>=0.10.4',
-        'qiskit-ibmq-provider>=0.19.1',
-        'qiskit-ignis>=0.7.0',
-        'qiskit-terra>=0.20.1',
-        "pylatexenc>=2.0"
+        'qiskit',
+        'matplotlib',
+        'qiskit-aer',
+        'qiskit-ibmq-provider',
+        'qiskit-ignis',
+        'qiskit-terra',
+        "pylatexenc"
     ]
 )
