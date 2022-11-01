@@ -1,5 +1,5 @@
-import os
 from atexit import register as __register
+import os
 
 _config_dir = ".UCQ_config"
 _layout_file = os.path.join(_config_dir, "layout.json")
@@ -8,6 +8,7 @@ _show_plt = False
 _states = {}
 _circs = []
 _hists = []
+_round_to = 8 # digits past the decimal point to round numbers
 
 __version__ = "0.1.9"
 

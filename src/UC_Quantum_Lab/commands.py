@@ -4,7 +4,7 @@ from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
 from math import log
 
-from . import _states, _circs, _hists, _master_show, _show_plt
+from . import _states, _circs, _hists, _master_show, _show_plt, _round_to
 from ._src import _get_path
 
 _circ_count = 0
@@ -54,9 +54,9 @@ def state(circuit:QuantumCircuit, show:bool=True)->list[complex]:
     for i in range(len(_state)):
         val = _state[i]
         if type(val) == complex:
-            val = round(val.real, 10) + round(val.imag, 10) *1j
+            val = round(val.real, _round_to) + round(val.imag, _round_to) *1j
         else:
-            val = round(val, 10)
+            val = round(val, _round_to)
         _data[_options[i]] = str(val).replace("(", "").replace(")", "")
 
     if show and _master_show:
