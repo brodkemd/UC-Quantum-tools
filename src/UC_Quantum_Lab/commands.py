@@ -12,7 +12,7 @@ _state_count = 0
 _hist_count = 0
 
 def _message(msg):
-    print(f"UC_Quantum_Lab: {msg}")
+    print(f"From UC_Quantum_Lab: {msg}")
 
 def _show_at_exit():
     global _show_plt

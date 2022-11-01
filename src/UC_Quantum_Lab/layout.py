@@ -1,5 +1,5 @@
-from . import _states, _circs, _hists, _layout_file, _master_show, _config_dir, _trigger_file
-from ._src import _trigger
+from . import _states, _circs, _hists, _layout_file, _master_show, _config_dir #, _trigger_file
+#from ._src import _trigger
 import os, json, platform
 
 _layout = {}
@@ -133,14 +133,13 @@ def _run():
 def _layout_at_exit():
     from . import _master_show
     if _master_show:
-        #print("here")
-        from .layout import _run
         _run()
-        _trigger()
+        # _trigger()
 
-def _exit():
-    if _config_dir in os.listdir():
-        for item in os.listdir(_config_dir):
-            # deletes png html or the trigger file from the config dir
-            if item == _trigger_file:
-                os.remove(os.path.join(_config_dir, item))
+# this cleans up from previous versions
+# def _exit():
+#     if _config_dir in os.listdir():
+#         for item in os.listdir(_config_dir):
+#             # deletes png html or the trigger file from the config dir
+#             if item == _trigger_file:
+#                 os.remove(os.path.join(_config_dir, item))

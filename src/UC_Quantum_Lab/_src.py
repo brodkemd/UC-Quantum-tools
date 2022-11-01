@@ -1,15 +1,15 @@
-from . import _config_dir, _trigger_file
+from . import _config_dir#, _trigger_file
 import os
 
 """
 Creates a file that triggers the vscode extension
 
 """
-def _trigger():
-    global _config_dir, _trigger_file
+# def _trigger():
+#     global _config_dir, _trigger_file
     
-    if _config_dir in os.listdir():
-        with open(os.path.join(_config_dir, _trigger_file), 'w'): pass
+#     if _config_dir in os.listdir():
+#         with open(os.path.join(_config_dir, _trigger_file), 'w'): pass
 
 
 """

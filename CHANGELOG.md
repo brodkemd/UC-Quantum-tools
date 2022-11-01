@@ -1,4 +1,8 @@
 # Changelog
+## [0.1.9] - 2022-10-28
+### Added
+- overhauled extension triggering system
+
 ## [0.1.8] - 2022-10-28
 ### Added
 - fixed bug with layout at exit functionality, making package detection better
