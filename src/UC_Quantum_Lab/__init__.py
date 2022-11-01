@@ -3,7 +3,6 @@ from atexit import register as __register
 
 _config_dir = ".UCQ_config"
 _layout_file = os.path.join(_config_dir, "layout.json")
-#_trigger_file = ".trigger"
 _master_show = False
 _show_plt = False
 _states = {}
@@ -22,9 +21,9 @@ if _config_dir in os.listdir():
             os.remove(os.path.join(_config_dir, item))
 
 
-from .layout import _layout_at_exit#, _exit
+from .layout import _layout_at_exit
 from .commands import _show_at_exit
+
 # need to be in this order
 __register(_layout_at_exit)
-# __register(_exit)
 __register(_show_at_exit)

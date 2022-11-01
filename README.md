@@ -10,6 +10,7 @@ If you encounter a bug please make an issue in the "issues" tab above. This is a
 Anyone who wants to contribute to the code, please do. Download the code, modify it, and create a pull request.
 
 ## Available Functions
+- **NOTE:** This package detects if you are using the vscode extension by checking if the ".UCQ_config" directory is in the directory that you are currently running the python file.
 - Functions from `UC_Quantum_Lab.commands`
     - `state`
         - **Description**: Displays a vector in vscode if using the UC_Quantum_Lab vscode extension. And no matter where you are using this function it will return the state vector as a list.
