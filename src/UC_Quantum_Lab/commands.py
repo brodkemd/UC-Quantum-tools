@@ -2,7 +2,9 @@ from qiskit import QuantumCircuit, Aer, execute
 from qiskit.quantum_info import Statevector
 from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
+import matplotlib
 from math import log
+from typing import Union
 
 from . import _states, _circs, _hists, _master_show, _show_plt, _round_to
 from ._src import _get_path
@@ -21,12 +23,18 @@ def _show_at_exit():
         plt.show()
 
 # diplays the image in the viewer or saves the image to the inputted path
-def display(circuit:QuantumCircuit, path:str="")->None:
+def display(obj:Union[QuantumCircuit, matplotlib.figure.Figure], path:str="")->None:
     global _circ_count, _circs, _master_show, _show_plt
-    circuit.draw(output='mpl')
+
+    # handles the different input types
+    if isinstance(obj, QuantumCircuit):
+        obj.draw(output='mpl')
+    elif not isinstance(obj, matplotlib.figure.Figure):
+        raise TypeError("input to \"display\" function must a qiskit quantum circuit or matplotlib figure")
+
     plt.tight_layout()
     if len(path): 
-        _message(f"outputing circuit diagram to \"{path}\"")
+        _message(f"display function outputing to:\"{path}\"")
         plt.savefig(path)
     elif _master_show:
         #print("displaying circuit")
