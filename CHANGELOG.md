@@ -1,4 +1,8 @@
 # Changelog
+## [0.1.10] - 2022-10-28
+### Changed
+- the dependency packages of this package
+
 ## [0.1.9] - 2022-10-28
 ### Added
 - overhauled extension triggering system
