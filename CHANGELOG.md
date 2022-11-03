@@ -1,4 +1,8 @@
 # Changelog
+## [0.1.11] - 2022-11-3
+### Changed
+- added matplotlib figure capability of display function
+
 ## [0.1.10] - 2022-10-28
 ### Changed
 - the dependency packages of this package
