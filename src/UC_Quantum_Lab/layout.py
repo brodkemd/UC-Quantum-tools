@@ -16,6 +16,7 @@ def _image_list_to_str(image_list:list[str])->str:
         if platform.system() == "Windows":
             p = p[p.index(":")+1:].replace("\\", "/")
         to_return+=f"<img src=\"{{URI}}{p}\" alt=\"no image to display\">"
+        #to_return+=f"<div class=\"image-container\">\n<div class=\"image detail-view\" style=\"background-image:url({{URI}}{p});\"></div>\n</div>\n"
     return to_return
 
 def _inverter(layout, flip:dict[str,str]):
