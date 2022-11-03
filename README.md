@@ -10,6 +10,7 @@ If you encounter a bug please make an issue in the "issues" tab above. This is a
 Anyone who wants to contribute to the code, please do. Download the code, modify it, and create a pull request.
 
 ## Available Functions
+- **NOTE:** This package detects if you are using the vscode extension by checking if the ".UCQ_config" directory is in the directory that you are currently running the python file.
 - Functions from `UC_Quantum_Lab.commands`
     - `state`
         - **Description**: Displays a vector in vscode if using the UC_Quantum_Lab vscode extension. And no matter where you are using this function it will return the state vector as a list.
@@ -32,11 +33,11 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             state(quantumciruit)
             ```
     - `display`
-        - **Description**: Displays a circuit diagram in vscode if using the UC_Quantum_Lab vscode extension. If you are not using the vscode extension, then:
+        - **Description**: Displays a circuit diagram (if a circuit is passed to this function) or a matplotlib figure (if a matplotlib figure is passed to this fucntion) in vscode if using the UC_Quantum_Lab vscode extension. If you are not using the vscode extension, then:
             - if you provide input *path* then the circuit diagram will be saved to that path.
             - if you do *not* input *path* then a matplotlib figure will pop up.
         - **inputs**:
-            - `circuit:QuantumCircuit`: a qiskit quantum circuit.
+            - `circuit:QuantumCircuit|matplotlib.figure.Figure`: a qiskit quantum circuit or matplotlib figure.
             - `path:string` (optional): a string path that you want to save the figure to.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**: (nothing)

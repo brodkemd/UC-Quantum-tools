@@ -2,8 +2,11 @@ from qiskit import QuantumCircuit, Aer, execute
 from qiskit.quantum_info import Statevector
 from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
+import matplotlib
 from math import log
-from . import _states, _circs, _hists, _master_show, _show_plt
+from typing import Union
+
+from . import _states, _circs, _hists, _master_show, _show_plt, _round_to
 from ._src import _get_path
 
 _circ_count = 0
@@ -11,7 +14,7 @@ _state_count = 0
 _hist_count = 0
 
 def _message(msg):
-    print(f"UC_Quantum_Lab: {msg}")
+    print(f"From UC_Quantum_Lab: {msg}")
 
 def _show_at_exit():
     global _show_plt
@@ -20,12 +23,18 @@ def _show_at_exit():
         plt.show()
 
 # diplays the image in the viewer or saves the image to the inputted path
-def display(circuit:QuantumCircuit, path:str="")->None:
+def display(obj:Union[QuantumCircuit, matplotlib.figure.Figure], path:str="")->None:
     global _circ_count, _circs, _master_show, _show_plt
-    circuit.draw(output='mpl')
+
+    # handles the different input types
+    if isinstance(obj, QuantumCircuit):
+        obj.draw(output='mpl')
+    elif not isinstance(obj, matplotlib.figure.Figure):
+        raise TypeError("input to \"display\" function must a qiskit quantum circuit or matplotlib figure")
+
     plt.tight_layout()
     if len(path): 
-        _message(f"outputing circuit diagram to \"{path}\"")
+        _message(f"display function outputing to:\"{path}\"")
         plt.savefig(path)
     elif _master_show:
         #print("displaying circuit")
@@ -53,9 +62,9 @@ def state(circuit:QuantumCircuit, show:bool=True)->list[complex]:
     for i in range(len(_state)):
         val = _state[i]
         if type(val) == complex:
-            val = round(val.real, 10) + round(val.imag, 10) *1j
+            val = round(val.real, _round_to) + round(val.imag, _round_to) *1j
         else:
-            val = round(val, 10)
+            val = round(val, _round_to)
         _data[_options[i]] = str(val).replace("(", "").replace(")", "")
 
     if show and _master_show:

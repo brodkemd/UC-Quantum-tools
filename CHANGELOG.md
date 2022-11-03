@@ -1,4 +1,16 @@
 # Changelog
+## [0.1.11] - 2022-11-3
+### Changed
+- added matplotlib figure capability of display function
+
+## [0.1.10] - 2022-10-28
+### Changed
+- the dependency packages of this package
+
+## [0.1.9] - 2022-10-28
+### Added
+- overhauled extension triggering system
+
 ## [0.1.8] - 2022-10-28
 ### Added
 - fixed bug with layout at exit functionality, making package detection better
