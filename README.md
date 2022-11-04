@@ -122,5 +122,17 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             custom({"left": "<h1>hello</h1>", "right" : "<h1>hello</h1>"})
             ```
         - **NOTE**: if you call this function before you call the inverts above the inverts will apply.
-
+- Functions from `UC_Quantum_Lab.utils`
+    - `get_binary_strings`
+        - **Description**: Generates all possible binary strings using the number of qubits that is inputted.
+        - **inputs**
+            - `num_qubits:int`: number of qubits (or normal bits) to generate all possible binary strings for. 
+        - **returns**
+            - `binary_strings:list[str]`: List of all possible binary strings, this scales exponentially so things can quickly get out of hand.
+        - **Example Useage**
+            ```python
+            from UC_Quantum_Lab.utils import get_binary_string
+            num_bits = 3
+            strings = get_binary_string(num_bits)
+            ```
 
