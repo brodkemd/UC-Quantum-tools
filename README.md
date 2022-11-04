@@ -18,9 +18,9 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             - `circuit:QuantumCircuit`: a qiskit quantum circuit **with no measurements in it**.
             - `show:boolean` (optional): a boolean indicating if you want to display the statevector in the UC_Quantum_Lab vscode extension (default is yes if using the extension).
         - **returns**:
-            - `statevector:list`: the statevector of the circuit in little endian format (this is how qiskit orders bits) in list form. You do not have to use this return (just do not assign it to a variable).
+            - `statevector:list[complex]`: the statevector of the circuit in little endian format (this is how qiskit orders bits) in list form. You do not have to use this return (just do not assign it to a variable).
         - **NOTE**: this function can be multiple times (whenever you can this function the statevector of the circuit up to the call will be created).
-        - **Example Useage**
+        - **Example Useage** (some ways to use it, not all)
             ```python
             from UC_Quantum_Lab.commands import state
             import qiskit
@@ -37,20 +37,30 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             - if you provide input *path* then the circuit diagram will be saved to that path.
             - if you do *not* input *path* then a matplotlib figure will pop up.
         - **inputs**:
-            - `circuit:QuantumCircuit|matplotlib.figure.Figure`: a qiskit quantum circuit or matplotlib figure.
+            - `obj:QuantumCircuit|matplotlib.figure.Figure|None`: a qiskit quantum circuit or matplotlib figure. If you do not provide this argument (i.e. it is None), then the latest matplotlib figure created will be displayed.
             - `path:string` (optional): a string path that you want to save the figure to.
+            - `delete:bool` (optional): Default is `True`. Whether or not to delete the figure given to or created by this function after it is displayed. If the function is going to display a pop up figure then this will be set to false automatically.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**: (nothing)
         - **NOTE**: this function can be multiple times and it will just generate more images (whenever you can this function a diagram of the circuit up to the call will be created).
-        - **Example Useage**
+        - **Example Useage** (some ways to use it, not all)
             ```python
             from UC_Quantum_Lab.commands import display
+            import matplotlib.pyplot as plt
             import qiskit
             quantumcircuit = qiskit.QuantumCircuit(2, 2)
 
             display(quantumciruit, path="local.png")
             # or 
             display(quantumciruit)
+            # or
+            fig = plt.figure()
+            # add stuff to figure
+            display(fig)
+            # or
+            plt.plot(x, y)
+            # add stuff to plot
+            display()
             ```
     - `counts`
         - **Description**: Displays a histogram in vscode if using the UC_Quantum_Lab vscode extension. If you are not using the vscode extension, then:
@@ -63,9 +73,9 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             - `show:boolean` (optional): whether or not display the circuit, default is true. If false, then only the dictionary will be returned and nothing else will happen.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**:
-            - `counts:dictionary`: the results of the simulation of the circuit as a dictionay where the keys are the binary strings and the values of the keys are the number of the times the binary string is the output of the circuit out of 1024. You do not have to use this return (just do not assign it to a variable).
+            - `counts:dictionary[string, int]`: the results of the simulation of the circuit as a dictionay where the keys are the binary strings and the values of the keys are the number of the times the binary string is the output of the circuit out of 1024. You do not have to use this return (just do not assign it to a variable).
         - **NOTE**: this function can be multiple times and it will just generate more images (and simulate the circuit at every call).
-        - **Example Useage**
+        - **Example Useage** (some ways to use it, not all)
             ```python
             from UC_Quantum_Lab.commands import counts
             import qiskit
