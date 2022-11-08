@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import _pylab_helpers, figure
 from math import log
 from typing import Union
+import warnings
 
 from . import _states, _circs, _hists, _master_show, _show_plt, _round_to
 from ._src import _get_path
@@ -14,7 +15,8 @@ _state_count = 0
 _hist_count = 0
 
 def _message(msg):
-    print(f"From UC_Quantum_Lab: {msg}")
+    warnings.warn(f"From UC_Quantum_Lab: {msg}", stacklevel=3)
+    #print(f"From UC_Quantum_Lab: {msg}")
 
 def _show_at_exit():
     global _show_plt
@@ -23,7 +25,7 @@ def _show_at_exit():
         plt.show()
 
 # diplays the image in the viewer or saves the image to the inputted path
-def display(obj:Union[QuantumCircuit, figure.Figure]=None, path:str="", delete:bool=True)->None:
+def display(obj:Union[QuantumCircuit, figure.Figure]=None, path:str="", delete:bool=True, dpi=None)->None:
     global _circ_count, _circs, _master_show, _show_plt
 
     # handles the different input types
@@ -42,11 +44,11 @@ def display(obj:Union[QuantumCircuit, figure.Figure]=None, path:str="", delete:b
     fig.tight_layout()
     if len(path): 
         _message(f"display function outputing to:\"{path}\"")
-        fig.savefig(path)
+        fig.savefig(path, dpi=dpi)
     elif _master_show:
         #print("displaying circuit")
         p = _get_path(f"_circ_{_circ_count}.png")
-        fig.savefig(p)
+        fig.savefig(p, dpi=dpi)
         _circs.append(p)
         _circ_count+=1
     else: 
@@ -95,7 +97,7 @@ def state(circuit:QuantumCircuit, show:bool=True)->list[complex]:
     return _state
 
 # displays the histogram of the circuit after execution in the viewer
-def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), path:str="", show:bool=True) -> dict[str, int]:
+def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), path:str="", show:bool=True, dpi=None) -> dict[str, int]:
     global _hist_count, _hists, _master_show, _show_plt
     counts = execute(circuit, backend=backend, shots=1024).result().get_counts()
     # accounting for weirdness of counts result from qiskit
@@ -106,12 +108,12 @@ def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), pa
 
     if len(path): 
         _message(f"outputing histogram to \"{path}\"")
-        plt.savefig(path)
+        plt.savefig(path, dpi=dpi)
     elif _master_show and show:
         #print("displaying histogram")
         plot_histogram(counts)
         p = _get_path(f"_hist_{_hist_count}.png")
-        plt.savefig(p)
+        plt.savefig(p, dpi=dpi)
         _hists.append(p)
         _hist_count+=1
     elif show:

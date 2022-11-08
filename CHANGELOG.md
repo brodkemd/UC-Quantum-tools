@@ -1,4 +1,9 @@
 # Changelog
+## [0.1.12] - 2022-11-8
+### Changed
+- added dpi for images
+- modified messaging to use warnings
+
 ## [0.1.11] - 2022-11-3
 ### Changed
 - added matplotlib figure capability of display function

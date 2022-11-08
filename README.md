@@ -38,8 +38,9 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             - if you do *not* input *path* then a matplotlib figure will pop up.
         - **inputs**:
             - `obj:QuantumCircuit|matplotlib.figure.Figure|None`: a qiskit quantum circuit or matplotlib figure. If you do not provide this argument (i.e. it is None), then the latest matplotlib figure created will be displayed.
-            - `path:string` (optional): a string path that you want to save the figure to.
+            - `path:string` (optional): a string path that you want to save the figure to. This command will throw a warning saying where it will save it to. To ignore this waring use the command `warnings.filterwarnings("ignore")` after importing the `warnings` module.
             - `delete:bool` (optional): Default is `True`. Whether or not to delete the figure given to or created by this function after it is displayed. If the function is going to display a pop up figure then this will be set to false automatically.
+            - `dpi:int` (optional): The resolution in dots per inch (int, default is none which uses the dpi provided by matplotlib.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**: (nothing)
         - **NOTE**: this function can be multiple times and it will just generate more images (whenever you can this function a diagram of the circuit up to the call will be created).
@@ -69,8 +70,9 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
         - **inputs**:
             - `circuit:QuantumCircuit`: a qiskit quantum circuit **that must have measurements in it**.
             - `backend:simulator` (optional): the simulator to execute the circuit on, default is IBM's qasm simulator. 
-            - `path:string` (optional): a string path that you want to save the figure to.
+            - `path:string` (optional): a string path that you want to save the figure to. To ignore this waring use the command `warnings.filterwarnings("ignore")` after importing the `warnings` module.
             - `show:boolean` (optional): whether or not display the circuit, default is true. If false, then only the dictionary will be returned and nothing else will happen.
+            - `dpi:int` (optional): The resolution in dots per inch (int, default is none which uses the dpi provided by matplotlib.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**:
             - `counts:dictionary[string, int]`: the results of the simulation of the circuit as a dictionay where the keys are the binary strings and the values of the keys are the number of the times the binary string is the output of the circuit out of 1024. You do not have to use this return (just do not assign it to a variable).
