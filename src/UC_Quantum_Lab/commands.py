@@ -15,7 +15,8 @@ _state_count = 0
 _hist_count = 0
 
 def _message(msg):
-    warnings.warn(f"From UC_Quantum_Lab: {msg}", stacklevel=3)
+    pass
+    #warnings.warn(f"From UC_Quantum_Lab: {msg}", stacklevel=3)
     #print(f"From UC_Quantum_Lab: {msg}")
 
 def _show_at_exit():

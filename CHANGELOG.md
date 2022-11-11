@@ -1,4 +1,8 @@
 # Changelog
+## [0.1.13] - 2022-11-11
+### Changed
+- turned off warning for display (it was more annoying than I thought)
+
 ## [0.1.12] - 2022-11-8
 ### Changed
 - added dpi for images
