@@ -72,7 +72,8 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             - `backend:simulator` (optional): the simulator to execute the circuit on, default is IBM's qasm simulator. 
             - `path:string` (optional): a string path that you want to save the figure to. 
             - `show:boolean` (optional): whether or not display the circuit, default is true. If false, then only the dictionary will be returned and nothing else will happen.
-            - `dpi:int` (optional): The resolution in dots per inch (int, default is none which uses the dpi provided by matplotlib.
+            - `dpi:int` (optional): The resolution in dots per inch, default is none which uses the dpi provided by matplotlib.
+            - `shots:int` (optional): The number of times to execute the circuit.
             - **NOTE**: if you are not using this function with the UC_Quantum_Lab vscode extension and you do not provide the path then a matplotlib figure will pop up.
         - **returns**:
             - `counts:dictionary[string, int]`: the results of the simulation of the circuit as a dictionay where the keys are the binary strings and the values of the keys are the number of the times the binary string is the output of the circuit out of 1024. You do not have to use this return (just do not assign it to a variable).
@@ -147,4 +148,16 @@ Anyone who wants to contribute to the code, please do. Download the code, modify
             num_bits = 3
             strings = get_binary_string(num_bits)
             ```
-
+- Functions from `UC_Quantum_Lab.elements`
+    - `Image`
+        - **Description**: Converts the inputted image path to an html element able to be rendered by the UC_Quantum_Lab extension for vscode
+        - **inputs**
+            - `path:string`: path to an image to be displayed. 
+        - **returns**
+            - `html:str`: the html required to load the image.
+        - **Example Useage**
+            ```python
+            from UC_Quantum_Lab.utils import get_binary_string
+            num_bits = 3
+            strings = get_binary_string(num_bits)
+            ```

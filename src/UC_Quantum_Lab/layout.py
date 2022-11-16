@@ -1,4 +1,5 @@
 from . import _states, _circs, _hists, _layout_file, _master_show
+from .elements import Image
 import os, json, platform
 
 _layout = {}
@@ -15,7 +16,7 @@ def _image_list_to_str(image_list:list[str])->str:
         p = _abs_path(item)
         if platform.system() == "Windows":
             p = p[p.index(":")+1:].replace("\\", "/")
-        to_return+=f"<img src=\"{{URI}}{p}\" alt=\"no image to display\">"
+        to_return+=Image(p)#f"<img src=\"{{URI}}{p}\" alt=\"no image to display\">"
         #to_return+=f"<div class=\"image-container\">\n<div class=\"image detail-view\" style=\"background-image:url({{URI}}{p});\"></div>\n</div>\n"
     return to_return
 
@@ -108,7 +109,6 @@ def custom(layout_json) -> None:
     global _layout, _custom
     _layout = layout_json
     _custom = True
-
 
 def _run():
     global _layout, _to_flip, _states, _circs, _hists, _master_show, _custom

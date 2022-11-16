@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from matplotlib import _pylab_helpers, figure
 from math import log
 from typing import Union
-import warnings
 
 from . import _states, _circs, _hists, _master_show, _show_plt, _round_to
 from ._src import _get_path
@@ -98,9 +97,9 @@ def state(circuit:QuantumCircuit, show:bool=True)->list[complex]:
     return _state
 
 # displays the histogram of the circuit after execution in the viewer
-def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), path:str="", show:bool=True, dpi=None) -> dict[str, int]:
+def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), path:str="", show:bool=True, dpi=None, shots=1024) -> dict[str, int]:
     global _hist_count, _hists, _master_show, _show_plt
-    counts = execute(circuit, backend=backend, shots=1024).result().get_counts()
+    counts = execute(circuit, backend=backend, shots=shots).result().get_counts()
     # accounting for weirdness of counts result from qiskit
     for item in list(counts):
         new_item = item.split(" ")[0]
