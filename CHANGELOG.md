@@ -1,12 +1,12 @@
 # Changelog
-## [0.1.14] - 2022-11-15
-### Changed
-- added "shots" input for counts function
-- added "elements" functionality
 
 ## [0.1.13] - 2022-11-11
+### Added
+- "shots" input for counts function
+- "elements" functionality
 ### Changed
 - turned off warning for display (it was more annoying than I thought)
+
 
 ## [0.1.12] - 2022-11-8
 ### Changed
