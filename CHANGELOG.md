@@ -1,4 +1,7 @@
 # Changelog
+## [0.1.15] - 2023-1-18
+### Added
+- temp fix for uri weirdness with "#" symbol in it
 
 ## [0.1.15] - 2023-1-17
 ### Changed
