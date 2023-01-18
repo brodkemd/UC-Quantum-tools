@@ -99,27 +99,28 @@ def state(circuit:QuantumCircuit, show:bool=True)->list[complex]:
 # displays the histogram of the circuit after execution in the viewer
 def counts(circuit:QuantumCircuit, backend=Aer.get_backend('qasm_simulator'), path:str="", show:bool=True, dpi=None, shots=1024) -> dict[str, int]:
     global _hist_count, _hists, _master_show, _show_plt
-    counts = execute(circuit, backend=backend, shots=shots).result().get_counts()
+    cs = execute(circuit, backend=backend, shots=shots).result().get_counts()
     # accounting for weirdness of counts result from qiskit
-    for item in list(counts):
-        new_item = item.split(" ")[0]
-        counts[new_item] = counts[item]
-        del counts[item]
+    for item in list(cs):
+        if len(item.split(" ")) - 1:
+            new_item = item.split(" ")[0]
+            cs[new_item] = cs[item]
+            del cs[item]
 
     if len(path): 
         _message(f"outputing histogram to \"{path}\"")
         plt.savefig(path, dpi=dpi)
     elif _master_show and show:
         #print("displaying histogram")
-        plot_histogram(counts)
+        plot_histogram(cs)
         p = _get_path(f"_hist_{_hist_count}.png")
         plt.savefig(p, dpi=dpi)
         _hists.append(p)
         _hist_count+=1
     elif show:
-        plot_histogram(counts)
+        plot_histogram(cs)
         _show_plt = True
 
-    return counts
+    return cs
 
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.15] - 2023-1-17
+### Changed
+- fixed bug in counts command
+- reduced number of packages required
+- how packages are import from the module
+- image command output to different html element
+
+## [0.1.14] - 2023-1-17
+### Changed
+- changed image
+
 ## [0.1.13] - 2022-11-11
 ### Added
 - "shots" input for counts function

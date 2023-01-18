@@ -10,7 +10,7 @@ _circs = []
 _hists = []
 _round_to = 8 # digits past the decimal point to round numbers
 
-__version__ = "0.1.14"
+__version__ = "0.1.15"
 
 # cleans up the config directory on init of this python module
 if _config_dir in os.listdir():
@@ -28,3 +28,8 @@ from .commands import _show_at_exit
 # need to be in this order
 __register(_layout_at_exit)
 __register(_show_at_exit)
+
+from .commands import state, display, counts
+from .layout import invert, horizontal_invert, vertical_invert, custom
+from .utils import get_binary_strings
+from .elements import Image

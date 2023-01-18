@@ -18,6 +18,6 @@ setup(
     url="https://github.com/UC-Advanced-Research-Computing/UC-Quantum-tools",
     install_requires=[
         'qiskit>=0.39.0',
-        'qiskit[all]>=0.39.0'
+        'matplotlib'
     ]
 )
